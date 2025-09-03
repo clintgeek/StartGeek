@@ -1,0 +1,16 @@
+# StartGeek Frontend Environment Variables
+VITE_BASEGEEK_URL=https://basegeek.clintgeek.com
+VITE_API_URL=http://localhost:3001
+
+# Weather API Configuration
+# Using Open-Meteo (free, no API key required)
+# VITE_OPENWEATHER_API_KEY=not_needed_with_open_meteo
+
+# Production URLs
+# VITE_BASEGEEK_URL=https://basegeek.clintgeek.com
+# Production StartGeek will be at: https://start.clintgeek.com
+
+JWT_SECRET=e96335fedffb854e850eef650989f75e1c577bb1e0e95921901e726e951fd58f1f511f0c8aafe9e6657f854f09d9ff3ec35877a3027220766b4b063bb70d0654
+JWT_REFRESH_SECRET=VhZdgNNCutDpGfdVfK38Yip4ii8EGg58eTSmNhKATyZidvgR3NwfpTZ7pbpcm6jR
+
+BASEGEEK_API_URL=bg_2b33f8b2647edabb5bfe773c5815a95aecfb0f64957f751487d577be93da57fc
