@@ -1,144 +1,197 @@
 # StartGeek
 
-A modern, React-based browser start page with server monitoring, intelligent search, and beautiful backgrounds.
+A modern, React-based browser start page with intelligent search and beautiful backgrounds.
 
-## Features
+## ✨ Features
 
 - 🕒 **Beautiful Clock Display** - Large, modern time display with timezone info
-- 🌤️ **Weather Integration** - Real-time weather with location-based backgrounds
+- 🌤️ **Weather Integration** - Real-time weather with location-based backgrounds (no API key required)
 - 🔍 **Smart Search** - Google AI search integration with multiple search engines
-- 📊 **Server Monitoring** - Monitor local services and Docker containers
 - 🎨 **Dynamic Backgrounds** - Time-based background images from Unsplash
 - 📱 **Responsive Design** - Works great on desktop and mobile
-- ⚡ **Modern Tech Stack** - React, TypeScript, Tailwind CSS, Framer Motion
+- ⚡ **Modern Tech Stack** - React, Tailwind CSS, Framer Motion
+- 🚀 **Zero Configuration** - Works out of the box, no API keys needed!
 
-## Quick Start
+## 🚀 Quick Start
 
-### Development
+### Development Setup
 
 1. **Clone and install dependencies:**
    ```bash
-   cd /Users/ccrocker/projects/StartGeek
+   git clone <repository-url>
+   cd StartGeek
    npm install
    ```
 
-2. **Set up environment:**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-3. **Start development server:**
+2. **Start the development server:**
    ```bash
    npm run dev
    ```
 
-4. **Open your browser:**
-   Navigate to `http://localhost:3000`
+3. **Open your browser:**
+   - Frontend: `http://localhost:3000`
 
 ### Production (Docker)
 
-1. **Build and run with Docker Compose:**
+1. **Build and run with Docker:**
    ```bash
    docker-compose up -d
    ```
 
 2. **Access the application:**
-   Navigate to `http://localhost:8828` (same port as original StartGeekTemp)
+   - Frontend: `http://localhost:3000`
 
-## Architecture
+## 🔧 Configuration
 
-### Frontend
-- **React 18** with TypeScript
-- **Tailwind CSS** for styling
-- **Framer Motion** for animations
-- **Lucide React** for icons
-- **Recharts** for data visualization
+**No configuration needed!** StartGeek works completely out of the box with:
 
-### Backend Services
-- **MongoDB** for data storage
-- **Redis** for caching and sessions
-- **BaseGeek aiGeek** for AI assistance
+- **Weather**: Uses free Open-Meteo API (no API key required)
+- **Search**: Uses Google AI search (no API key required)
+- **Backgrounds**: Uses Unsplash (no API key required)
+- **Location**: Auto-detects your location via IP
 
-### Pages
-- **Home** - Minimal start page with clock, weather, and quick links
-- **Dashboard** - System stats and performance monitoring
-- **Monitoring** - Server health checks and service status
-- **Settings** - Customization options
+## 🔍 Smart Search Features
 
-## Configuration
+StartGeek includes an intelligent search system with:
 
-### Environment Variables
+- **Google AI Search** - Primary search uses Google's AI mode (`udm=50`)
+- **Multiple Search Engines** - Google, YouTube, GitHub, Stack Overflow, Wikipedia, etc.
+- **Keyboard Navigation** - Use `Ctrl+K` (or `Cmd+K`) to focus search
+- **Smart Suggestions** - Type-ahead suggestions for engines and shortcuts
 
-Key environment variables (see `.env.example`):
+### Search Examples
 
-- `WEATHER_API_KEY` - OpenWeatherMap API key for weather data
-- `BASEGEEK_API_URL` - BaseGeek API endpoint for AI features
-- `MONGODB_URI` - MongoDB connection string
-- `REDIS_URL` - Redis connection string
+- Type any question → Opens Google AI search
+- `youtube: cats` → Search YouTube for cats
+- `github: react` → Search GitHub for React
+- `gmail` → Open Gmail
+- `weather` → Search weather information
 
-### Customization
+## 🎨 Customization
 
-#### Quick Links
-Edit `src/components/QuickLinks.tsx` to customize your shortcuts.
+### Background Images
+- Automatic time-based backgrounds from Unsplash
+- Categories: sunrise, day, sunset, night
+- Smooth transitions between time periods
 
-#### Monitored Services
-Add services to monitor in `src/pages/MonitoringPage.tsx` or via the settings page.
+### Weather Integration
+- Location-based weather display
+- 7-day forecast
+- Weather-appropriate background themes
+- Uses Open-Meteo API (completely free)
 
-#### Weather Location
-Change default location in settings or via environment variables.
+## 🏗️ Architecture
 
-## Integration with BaseGeek
-
-StartGeek integrates with your existing BaseGeek aiGeek system:
-
-1. **AI Chat Widget** - Provides intelligent assistance
-2. **System Monitoring** - Leverages BaseGeek's monitoring capabilities
-3. **User Management** - Can integrate with BaseGeek's auth system
-
-## Docker Deployment
-
-The application includes a complete Docker setup:
-
-- **Multi-stage build** for optimized production images
-- **Nginx** for serving static files
-- **MongoDB & Redis** for data persistence
-- **Same port (8828)** as original StartGeekTemp for easy replacement
-
-## Development
-
-### Project Structure
 ```
-src/
-├── components/          # Reusable UI components
-├── pages/              # Main application pages
-├── hooks/              # Custom React hooks
-├── utils/              # Utility functions
-├── types/              # TypeScript type definitions
-└── styles/             # Global styles and themes
+StartGeek/
+├── src/
+│   ├── components/         # React components
+│   │   ├── BackgroundManager.jsx
+│   │   ├── Clock.jsx
+│   │   ├── CombinedWeather.jsx
+│   │   └── SearchBox.jsx
+│   ├── services/          # API services
+│   │   └── weatherService.js
+│   ├── App.jsx            # Main app component
+│   └── main.jsx           # Entry point
+├── public/                # Static assets
+├── Dockerfile             # Docker configuration
+└── docker-compose.yml     # Docker Compose setup
 ```
 
-### Available Scripts
+### Tech Stack
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+**Frontend:**
+- React 18 with Hooks
+- Vite for build tooling
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Lucide React for icons
 
-## Contributing
+**APIs (All Free):**
+- Open-Meteo for weather data
+- ipapi.co for location detection
+- Google AI Search for intelligent search
+- Unsplash for background images
+
+## 🐳 Docker Deployment
+
+Ultra-simple single-container deployment (no Dockerfile needed!):
+
+```bash
+# Build and run
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop
+docker-compose down
+```
+
+**Service:**
+- `startgeek` - React app served with Node.js (port 3000)
+
+The Docker setup automatically:
+1. Installs dependencies
+2. Builds the React app
+3. Serves it on port 3000
+
+## 🔒 Security & Privacy
+
+- **No API Keys Required** - Uses only free, public APIs
+- **Client-Side Only** - No backend server or database
+- **Privacy Focused** - Location detection via IP only
+- **No Data Storage** - Everything runs in your browser
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## 🆘 Troubleshooting
 
-- Original StartGeekTemp for inspiration
-- Unsplash for beautiful background images
-- BaseGeek ecosystem for AI and backend services
+### Common Issues
+
+1. **Weather Not Loading**
+   - Check browser console for errors
+   - Ensure internet connection is working
+   - Open-Meteo API is free and doesn't require keys
+
+2. **Search Not Working**
+   - Search functionality works entirely client-side
+   - Check browser console for JavaScript errors
+   - Ensure pop-up blockers aren't interfering
+
+3. **Backgrounds Not Loading**
+   - Check internet connection
+   - Unsplash images load directly from their CDN
+
+### Development Tips
+
+- Use `npm run dev` for hot reloading
+- Check browser console for errors
+- All functionality is client-side, no backend needed
+
+## 🔄 Updates
+
+To update StartGeek:
+
+```bash
+git pull origin main
+npm install
+
+# Restart if using Docker
+docker-compose down && docker-compose up -d
+```
+
+---
+
+**StartGeek v2.0.0** - Simplified, fast, and zero-configuration start page.
